@@ -13,10 +13,15 @@ link_directories(${SFML_DIR}/lib)
 include_directories(
     PRIVATE_HEADER 
     ${PROJECT_SOURCE_DIR}/Engine/include
-    ${PROJECT_SOURCE_DIR}/Exemple
+    ${PROJECT_SOURCE_DIR}/Exemple/src/main_loop
+    ${PROJECT_SOURCE_DIR}/Exemple/src/scenes
     )
 
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/*.cpp)
+file(
+    GLOB_RECURSE SOURCES CONFIGURE_DEPENDS 
+    ${PROJECT_SOURCE_DIR}/Engine/*.cpp
+    ${PROJECT_SOURCE_DIR}/Exemple/*.cpp
+    )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

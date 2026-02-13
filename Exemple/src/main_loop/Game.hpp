@@ -1,6 +1,9 @@
 #ifndef GAME
 #define GAME
 #include <SFML/Graphics.hpp>
+#include "SceneManager.hpp"
+#include "SceneType.hpp"
+#include "Menu.hpp"
 
 class Game
 {
@@ -9,6 +12,9 @@ private:
     sf::RenderWindow window;
     sf::View view;
     sf::Clock clock;
+
+    // le scene manager
+    SceneManager sceneManager;
 
     float dt;
 
