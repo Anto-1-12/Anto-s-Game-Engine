@@ -32,8 +32,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 # ---- Copie les assets dans le dossier de build ----
-#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E copy_directory
-#        "${PROJECT_SOURCE_DIR}/assets"
-#        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
-#)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/Exemple/assets"
+        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
+)
