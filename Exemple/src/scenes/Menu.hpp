@@ -2,12 +2,16 @@
 #define MENU
 
 #include "Scene.hpp"
+#include "Button.hpp"
 
 class Menu : public Scene
 {
     private:
         std::string scneneToChange;
         bool wantToChange;
+
+        Button play_button;
+        Button option_button;
 
     public:
         Menu();
