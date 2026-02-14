@@ -15,7 +15,8 @@ class Menu : public Scene
 
     public:
         Menu();
-        void handleEvent(const sf::Event& event, sf::RenderWindow& window) override;
+        ~Menu();
+        void event(const sf::Event& even) override;
         void update(float dt) override;
         void draw(sf::RenderWindow& window) override;
 

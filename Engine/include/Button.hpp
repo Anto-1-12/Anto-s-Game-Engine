@@ -9,6 +9,7 @@ private:
 
     sf::Font font;
     sf::Text text;
+    std::string txt;
     
     float coo_x;
     float coo_y;
@@ -24,6 +25,8 @@ private:
     sf::Color textColor;
     sf::Color mouseOnTextColor;
 
+    sf::Vector2f default_size;
+
     bool mouseIsOnItSelf = false;
     bool isClicked = false;
 
@@ -35,6 +38,9 @@ public:
     void draw(sf::RenderWindow& window);
     void event(const sf::Event& event);
     void setCoo(float x,float y);
+
+    void resize(sf::Vector2f size);
+    sf::Vector2f get_size();
 
     bool buttonIsClicked();
 };

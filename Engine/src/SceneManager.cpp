@@ -38,9 +38,9 @@ void SceneManager::draw(sf::RenderWindow& window)
 }
 
 //event de la scene
-void SceneManager::handelEvent(const sf::Event& event, sf::RenderWindow& window)
+void SceneManager::event(const sf::Event& event)
 {
-    scene->handleEvent(event, window);
+    scene->event(event);
 }
 
 //update de la scene + detection de changement de scene
@@ -51,9 +51,6 @@ void SceneManager::update( float dt)
     //regarder si on veut changer de scene
     if(scene->wantToChangeScene())
     {
-        //obtenir la scene sur laquelle on veut changer et changer de scene
-        std::cout<<"changement de scene"<<std::endl;
-
         //savoir la scene sur laquelle on veut changer
         std::string changeType = scene->getSceneChangeType();
         

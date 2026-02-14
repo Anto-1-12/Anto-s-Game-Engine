@@ -1,8 +1,9 @@
 #include "Button.hpp"
 
-Button::Button(std::string backTexture,std::string mouseBackTexture,std::string police,std::string txt,sf::Color color,sf::Color mouseOnColor, float x,float y,int textScale,float borderSize):
+Button::Button(std::string backTexture,std::string mouseBackTexture,std::string police,std::string n_txt,sf::Color color,sf::Color mouseOnColor, float x,float y,int textScale,float borderSize):
     font(police),
-    text(font,txt,textScale),
+    text(font,n_txt,textScale),
+    txt(n_txt),
     
     coo_x(x),
     coo_y(y),
@@ -46,6 +47,8 @@ Button::Button(std::string backTexture,std::string mouseBackTexture,std::string 
     float coefY = (hitBox.size.y / backGround.getTexture().getSize().y) * buttonBorder;
     
     backGround.setScale({coefX,coefY});
+
+    default_size = hitBox.size;
 
 }
 
@@ -107,18 +110,6 @@ void Button::event(const sf::Event& event)
     {
         isClicked = false;
     }
-
-    if (const auto* resized = event.getIf<sf::Event::Resized>())
-    {
-        std::cout << "new width: " << resized->size.x << std::endl;
-        std::cout << "new height: " << resized->size.y << std::endl;
-
-        float scaleHeight = (resized->size.y * hitBox.size.y) / 900.0f;
-        float coeff = scaleHeight/hitBox.size.y;
-        
-        text.scale({1,coeff});
-        backGround.scale({1,coeff});
-    }
 }
 
 void Button::setCoo(float x, float y)
@@ -130,4 +121,25 @@ void Button::setCoo(float x, float y)
 bool Button::buttonIsClicked()
 {
     return isClicked;
+}
+
+void Button::resize(sf::Vector2f size)
+{
+    float coeff = (size.x/hitBox.size.x + size.y/hitBox.size.y)/2;
+
+    float scale = text.getCharacterSize() * coeff;
+    text = sf::Text(font,txt,scale);
+    
+    hitBox.size = size;
+    text.setOrigin(hitBox.position);
+
+    float coefX = (hitBox.size.x / backGround.getTexture().getSize().x) * buttonBorder;
+    float coefY = (hitBox.size.y / backGround.getTexture().getSize().y) * buttonBorder;
+    
+    backGround.setScale({coefX,coefY});
+}
+
+sf::Vector2f Button::get_size()
+{
+    return default_size;
 }

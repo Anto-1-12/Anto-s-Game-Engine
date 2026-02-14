@@ -13,6 +13,8 @@ private:
     sf::View view;
     sf::Clock clock;
 
+    bool isFullScreen = false;
+
     // le scene manager
     SceneManager sceneManager;
 

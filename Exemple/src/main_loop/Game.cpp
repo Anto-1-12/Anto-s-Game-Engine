@@ -3,7 +3,7 @@
 //initialisation des variables
 Game::Game(): 
     //fenetre
-    window(sf::VideoMode({1280, 720}), "Exemple", sf::Style::Titlebar | sf::Style::Close),
+    window(sf::VideoMode({1280, 720}), "Exemple", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize),
     //vue de la fenetre
     view(sf::FloatRect({0.0f, 0.0f}, {1600.0f, 900.0f})),
     //initialiser le SceneManager
@@ -37,9 +37,31 @@ void Game::run()
             //------------------------------------------------
             if (event.has_value())
             {
-                sceneManager.handelEvent(event.value(),window);
+                sceneManager.event(event.value());
             }
             //------------------------------------------------
+
+            //gestion du full screen avec f11
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyPressed->scancode == sf::Keyboard::Scancode::F11)
+                {
+                    //petit t flip flop XD
+                    isFullScreen = !isFullScreen;
+                    
+                    if (isFullScreen)
+                    {
+                        //remplace la fenetre par un full screen
+                        window.create(sf::VideoMode::getDesktopMode(), "KDW", sf::State::Fullscreen);
+                        window.setView(view);
+                    }
+                    else
+                    {
+                        //remplace la fenetre par un windowed
+                        window.create(sf::VideoMode({1280, 720}), "KDW", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
+                        window.setView(view);
+                    }
+                }
+            }
 
         }
         

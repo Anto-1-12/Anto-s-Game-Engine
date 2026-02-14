@@ -9,6 +9,11 @@ Menu::Menu():
     wantToChange = false;
 }
 
+Menu::~Menu()
+{
+
+}
+
 void Menu::draw(sf::RenderWindow& window)
 {
 
@@ -16,10 +21,27 @@ void Menu::draw(sf::RenderWindow& window)
     option_button.draw(window);
 }
 
-void Menu::handleEvent(const sf::Event& event, sf::RenderWindow& window)
+void Menu::event(const sf::Event& event)
 {
     play_button.event(event);
     option_button.event(event);
+
+    //gestion de la resize
+    //pas necessaire si on utilise un view
+    /*
+    if (const auto* resized = event.getIf<sf::Event::Resized>())
+    {
+        sf::Vector2f size_play_b = play_button.get_size();
+        sf::Vector2f size_option_b = option_button.get_size();
+        
+        float coeff_x = static_cast<float>(resized->size.x)/1600.f;
+        float coeff_y = static_cast<float>(resized->size.y)/900.f;
+
+        play_button.resize(sf::Vector2f(size_play_b.x*coeff_x,size_play_b.y*coeff_y));
+        option_button.resize(sf::Vector2f(size_option_b.x*coeff_x,size_option_b.y*coeff_y));
+        
+    }
+    */
 }
 
 void Menu::update(float dt)
@@ -30,7 +52,8 @@ void Menu::update(float dt)
     }
     else if(option_button.buttonIsClicked())
     {
-
+        scneneToChange = "Option";
+        wantToChange = true;
     }
 }
 

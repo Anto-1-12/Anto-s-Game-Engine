@@ -13,7 +13,7 @@ public:
     Scene() = default;
     
     //methode d'update du jeu
-    virtual void handleEvent(const sf::Event& event, sf::RenderWindow& window) = 0;
+    virtual void event(const sf::Event& event) = 0;
     virtual void update(float dt) = 0;
     virtual void draw(sf::RenderWindow& window) = 0;
 

@@ -1,5 +1,6 @@
 #include "SceneType.hpp"
 #include "Menu.hpp"
+#include "Option.hpp"
 
 //constructeur
 SceneType::SceneType()
@@ -18,6 +19,9 @@ Scene* SceneType::getSceneFromType(std::string type)
     //on defini les types de scenes
     if (type == "Menu"){
         return new Menu();
+    }
+    else if (type == "Option"){
+        return new Option();
     }
 
     //n'est pas sensé arriver
