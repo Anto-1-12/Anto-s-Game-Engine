@@ -3,10 +3,14 @@
 Menu::Menu(): 
     Scene(),
     play_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Play",sf::Color(255,255,255),sf::Color(200,200,200),800,250,70,2.0f),
-    option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),800,450.f,70,2.0f)
+    option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),800,450.f,70,2.0f),
+    scneneToChange("Menu"),
+    wantToChange(false),
+    bg("assets/textures/bground.png"),
+    backGround(bg)
 {
-    scneneToChange = "Menu";
-    wantToChange = false;
+    sf::Vector2f size = sf::Vector2f(bg.getSize().x,bg.getSize().y);
+    backGround.setScale({1600/size.x,900/size.y});
 }
 
 Menu::~Menu()
@@ -17,6 +21,23 @@ Menu::~Menu()
 void Menu::draw(sf::RenderWindow& window)
 {
 
+    //      faire un background pas affecté par le letterboxing
+    //---------------------------------------------------------------
+    sf::View actualView = window.getView();
+
+    window.setView(window.getDefaultView());
+
+    sf::Vector2f size = sf::Vector2f(bg.getSize().x,bg.getSize().y);
+    sf::Vector2f windowSize = sf::Vector2f(static_cast<float>(window.getSize().x),static_cast<float>(window.getSize().y));
+
+    backGround.setOrigin(size / 2.0f);
+    backGround.setPosition(windowSize / 2.0f);
+
+    window.draw(backGround);
+
+    window.setView(actualView);
+    //---------------------------------------------------------------
+    
     play_button.draw(window);
     option_button.draw(window);
 }
@@ -27,10 +48,19 @@ void Menu::event(const sf::Event& event)
     option_button.event(event);
 
     //gestion de la resize
-    //pas necessaire si on utilise un view
-    /*
+    
+    
     if (const auto* resized = event.getIf<sf::Event::Resized>())
     {
+        sf::Vector2f size = sf::Vector2f(bg.getSize().x,bg.getSize().y);
+        sf::Vector2f windowSize = sf::Vector2f(static_cast<float>(resized->size.x),static_cast<float>(resized->size.y));
+
+        float max = std::max(windowSize.x/size.x,windowSize.y/size.y);
+    
+        backGround.setScale({max,max});
+
+        //pas necessaire si on utilise un view
+        /*
         sf::Vector2f size_play_b = play_button.get_size();
         sf::Vector2f size_option_b = option_button.get_size();
         
@@ -39,9 +69,9 @@ void Menu::event(const sf::Event& event)
 
         play_button.resize(sf::Vector2f(size_play_b.x*coeff_x,size_play_b.y*coeff_y));
         option_button.resize(sf::Vector2f(size_option_b.x*coeff_x,size_option_b.y*coeff_y));
-        
+        */
     }
-    */
+    
 }
 
 void Menu::update(float dt)

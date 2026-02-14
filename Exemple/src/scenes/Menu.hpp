@@ -13,6 +13,9 @@ class Menu : public Scene
         Button play_button;
         Button option_button;
 
+        sf::Texture bg;
+        sf::Sprite backGround;
+
     public:
         Menu();
         ~Menu();

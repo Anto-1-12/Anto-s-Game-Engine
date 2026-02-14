@@ -39,7 +39,8 @@ void Game::letterboxing(sf::Vector2f size)
         sizeY = windowRatio / viewRatio;
         posY = (1.f - sizeY) / 2.f;
     }
-
+    sf::FloatRect t = sf::FloatRect();
+    
     view.setViewport(
     sf::FloatRect(
             sf::Vector2f(posX, posY),
