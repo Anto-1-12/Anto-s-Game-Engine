@@ -14,6 +14,40 @@ Game::Game():
     window.setView(view);
 }
 
+void Game::letterboxing(sf::Vector2f size)
+{
+    float windowRatio = static_cast<float>(size.x)/ size.y;
+    float viewRatio = view.getSize().x/ view.getSize().y;
+    
+    float sizeX = 1.f;
+    float sizeY = 1.f;
+    float posX  = 0.f;
+    float posY  = 0.f;
+
+    bool horizontalSpacing = true;
+
+    if (windowRatio < viewRatio)
+        horizontalSpacing = false;
+
+    if (horizontalSpacing)
+    {
+        sizeX = viewRatio / windowRatio;
+        posX = (1.f - sizeX) / 2.f;
+    }
+    else
+    {
+        sizeY = windowRatio / viewRatio;
+        posY = (1.f - sizeY) / 2.f;
+    }
+
+    view.setViewport(
+    sf::FloatRect(
+            sf::Vector2f(posX, posY),
+            sf::Vector2f(sizeX, sizeY)
+        )
+    );
+}
+
 //La methode run
 void Game::run()
 {
@@ -38,6 +72,13 @@ void Game::run()
             if (event.has_value())
             {
                 sceneManager.event(event.value());
+                
+                //gestion du letterboxing
+                if (const auto resized = event.value().getIf<sf::Event::Resized>())
+                {
+                    letterboxing(sf::Vector2f(resized->size.x,resized->size.y));
+                    window.setView(view);
+                }
             }
             //------------------------------------------------
 
@@ -52,14 +93,18 @@ void Game::run()
                     {
                         //remplace la fenetre par un full screen
                         window.create(sf::VideoMode::getDesktopMode(), "KDW", sf::State::Fullscreen);
+                        letterboxing(sf::Vector2f(window.getSize().x,window.getSize().y));
                         window.setView(view);
                     }
                     else
                     {
                         //remplace la fenetre par un windowed
                         window.create(sf::VideoMode({1280, 720}), "KDW", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
+                        letterboxing(sf::Vector2f(window.getSize().x,window.getSize().y));
                         window.setView(view);
                     }
+
+
                 }
             }
 

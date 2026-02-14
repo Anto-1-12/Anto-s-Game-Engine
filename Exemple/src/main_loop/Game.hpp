@@ -24,6 +24,9 @@ public:
     //methode lancement de la boucle
     void run();
 
+    //pour réequilibrer le ratio de la fenetre lors du resize -> utile uniquement si on utilise une view
+    void letterboxing(sf::Vector2f size);
+
     //constructeur
     Game();
 
