@@ -2,8 +2,8 @@
 
 Menu::Menu(): 
     Scene(),
-    play_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Play",sf::Color(255,255,255),sf::Color(200,200,200),600,100,70,2.0f),
-    option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),600,300.f,70,2.0f)
+    play_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Play",sf::Color(255,255,255),sf::Color(200,200,200),800,250,70,2.0f),
+    option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),800,450.f,70,2.0f)
 {
     scneneToChange = "Menu";
     wantToChange = false;

@@ -2,7 +2,7 @@
 
  Option::Option(): 
     Scene(),
-    back_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Back",sf::Color(255,255,255),sf::Color(200,200,200),600,200,70,2.0f)
+    back_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Back",sf::Color(255,255,255),sf::Color(200,200,200),170,70,70,2.0f)
 {
     scneneToChange = "Menu";
     wantToChange = false;
