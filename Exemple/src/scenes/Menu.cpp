@@ -27,11 +27,10 @@ void Menu::draw(sf::RenderWindow& window)
 
     window.setView(window.getDefaultView());
 
-    sf::Vector2f size = sf::Vector2f(bg.getSize().x,bg.getSize().y);
+    sf::Vector2f size = sf::Vector2f(backGround.getTexture().getSize().x,backGround.getTexture().getSize().y);
     sf::Vector2f windowSize = sf::Vector2f(static_cast<float>(window.getSize().x),static_cast<float>(window.getSize().y));
-
-    backGround.setOrigin(size / 2.0f);
-    backGround.setPosition(windowSize / 2.0f);
+    
+    backGround.setScale({windowSize.x/size.x,windowSize.y/size.y});
 
     window.draw(backGround);
 
@@ -49,18 +48,11 @@ void Menu::event(const sf::Event& event)
 
     //gestion de la resize
     
-    
+    /*
     if (const auto* resized = event.getIf<sf::Event::Resized>())
     {
-        sf::Vector2f size = sf::Vector2f(bg.getSize().x,bg.getSize().y);
-        sf::Vector2f windowSize = sf::Vector2f(static_cast<float>(resized->size.x),static_cast<float>(resized->size.y));
-
-        float max = std::max(windowSize.x/size.x,windowSize.y/size.y);
-    
-        backGround.setScale({max,max});
-
         //pas necessaire si on utilise un view
-        /*
+        
         sf::Vector2f size_play_b = play_button.get_size();
         sf::Vector2f size_option_b = option_button.get_size();
         
@@ -69,9 +61,9 @@ void Menu::event(const sf::Event& event)
 
         play_button.resize(sf::Vector2f(size_play_b.x*coeff_x,size_play_b.y*coeff_y));
         option_button.resize(sf::Vector2f(size_option_b.x*coeff_x,size_option_b.y*coeff_y));
-        */
+        
     }
-    
+    */
 }
 
 void Menu::update(float dt)
