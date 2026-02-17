@@ -2,9 +2,10 @@
 
 Menu::Menu(): 
     Scene(),
-    play_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Play",sf::Color(255,255,255),sf::Color(200,200,200),800,250,70,2.0f),
-    option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),800,450.f,70,2.0f),
-    raycasting_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Raycasting",sf::Color(255,255,255),sf::Color(200,200,200),800,650.f,70,2.0f),
+    play_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Play",sf::Color(255,255,255),sf::Color(200,200,200),800,150,70,2.0f),
+    option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),800,350.f,70,2.0f),
+    raycasting_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Raycasting",sf::Color(255,255,255),sf::Color(200,200,200),800,550.f,70,2.0f),
+    D3_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","3D",sf::Color(255,255,255),sf::Color(200,200,200),800,750.f,70,2.0f),
     scneneToChange("Menu"),
     wantToChange(false),
     bg("assets/textures/bground.png"),
@@ -41,6 +42,7 @@ void Menu::draw(sf::RenderWindow& window)
     play_button.draw(window);
     option_button.draw(window);
     raycasting_button.draw(window);
+    D3_button.draw(window);
 }
 
 void Menu::event(const sf::Event& event)
@@ -48,6 +50,7 @@ void Menu::event(const sf::Event& event)
     play_button.event(event);
     option_button.event(event);
     raycasting_button.event(event);
+    D3_button.event(event);
 
     //gestion de la resize
     
@@ -83,6 +86,11 @@ void Menu::update(float dt)
     else if(raycasting_button.buttonIsClicked())
     {
         scneneToChange = "Raycasting";
+        wantToChange = true;
+    }
+    else if(D3_button.buttonIsClicked())
+    {
+        scneneToChange = "3D";
         wantToChange = true;
     }
 }

@@ -15,6 +15,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/Engine/include
     ${PROJECT_SOURCE_DIR}/Exemple/src/main_loop
     ${PROJECT_SOURCE_DIR}/Exemple/src/scenes
+    ${PROJECT_SOURCE_DIR}/Exemple/src/utiles
     )
 
 file(

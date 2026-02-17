@@ -2,6 +2,7 @@
 #include "Menu.hpp"
 #include "Option.hpp"
 #include "Raycasting.hpp"
+#include "3D.hpp"
 
 //constructeur
 SceneType::SceneType()
@@ -26,6 +27,9 @@ Scene* SceneType::getSceneFromType(std::string type)
     }
     else if (type == "Raycasting"){
         return new Raycasting();
+    }
+    else if (type == "3D"){
+        return new D3();
     }
 
     //n'est pas sensé arriver

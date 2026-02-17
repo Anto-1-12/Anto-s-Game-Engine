@@ -1,31 +1,31 @@
-#include "Raycasting.hpp"
+#include "3D.hpp"
 
-Raycasting::Raycasting(): 
+D3::D3(): 
     Scene(),
     menu_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Menu",sf::Color(255,255,255),sf::Color(200,200,200),170,70,70,2.0f),
     scneneToChange("Menu"),
     wantToChange(false),
-    coo(30,30),
+    coo(30,30,0),
     angle(2.05),
     vitesse(1)
     //test
 {
-    map.push_back(Block(sf::Vector2f(0,0),20));
-    map.push_back(Block(sf::Vector2f(0,60),20));
-    map.push_back(Block(sf::Vector2f(60,0),20));
-    map.push_back(Block(sf::Vector2f(60,60),20));
+    map.push_back(Block3D(sf::Vector3f(0,0,0),20));
+    map.push_back(Block3D(sf::Vector3f(0,60,0),20));
+    map.push_back(Block3D(sf::Vector3f(60,0,0),20));
+    map.push_back(Block3D(sf::Vector3f(60,60,0),20));
 }
 
-Raycasting::~Raycasting()
+D3::~D3()
 {
     
 }
 
-void Raycasting::draw(sf::RenderWindow& window)
+void D3::draw(sf::RenderWindow& window)
 {
     for (int i = 0; i < map.size() ; i++)
     {
-        std::vector<sf::Vector2f> block = map[i].getCoo();
+        std::vector<sf::Vector3f> block = map[i].getCoo();
 
         std::vector<std::vector<sf::Vector2f>> points;
 
@@ -33,7 +33,7 @@ void Raycasting::draw(sf::RenderWindow& window)
         {
             //         valeur raw
             //------------------------------------------ 
-            sf::Vector2f blockCoo = block[a];
+            sf::Vector3f blockCoo = block[a];
             
             float w = window.getView().getSize().x;
             float h = window.getView().getSize().y;
@@ -91,12 +91,12 @@ void Raycasting::draw(sf::RenderWindow& window)
     menu_button.draw(window);
 }
 
-void Raycasting::event(const sf::Event& event)
+void D3::event(const sf::Event& event)
 {
     menu_button.event(event);
 }
 
-void Raycasting::update(float dt)
+void D3::update(float dt)
 {
     if(menu_button.buttonIsClicked())
     {
@@ -145,12 +145,12 @@ void Raycasting::update(float dt)
 
 }
 
-bool Raycasting::wantToChangeScene()
+bool D3::wantToChangeScene()
 {
     return wantToChange;
 }
 
-std::string Raycasting::getSceneChangeType()
+std::string D3::getSceneChangeType()
 {
     return scneneToChange;
 }

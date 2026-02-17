@@ -1,5 +1,6 @@
 #ifndef RAYCASTING
 #define RAYCASTING
+#include <cmath>
 #include "Scene.hpp"
 #include "Button.hpp"
 #include "block.hpp"
@@ -16,6 +17,7 @@ class Raycasting : public Scene
         std::vector<Block> map;
         sf::Vector2f coo;
         float angle;
+        float vitesse;
 
     public:
         Raycasting();

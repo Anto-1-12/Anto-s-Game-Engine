@@ -1,26 +1,27 @@
-#ifndef MENU
-#define MENU
-
+#ifndef TROISD
+#define TROISD
+#include <cmath>
 #include "Scene.hpp"
 #include "Button.hpp"
+#include "block3D.hpp"
 
-class Menu : public Scene
+class D3 : public Scene
 {
     private:
+
         std::string scneneToChange;
         bool wantToChange;
 
-        Button play_button;
-        Button option_button;
-        Button raycasting_button;
-        Button D3_button;
+        Button menu_button;
 
-        sf::Texture bg;
-        sf::Sprite backGround;
+        std::vector<Block3D> map;
+        sf::Vector3f coo;
+        float angle;
+        float vitesse;
 
     public:
-        Menu();
-        ~Menu();
+        D3();
+        ~D3();
         void event(const sf::Event& even) override;
         void update(float dt) override;
         void draw(sf::RenderWindow& window) override;
@@ -28,5 +29,6 @@ class Menu : public Scene
         bool wantToChangeScene() override;
         std::string getSceneChangeType() override;
 };
+
 
 #endif

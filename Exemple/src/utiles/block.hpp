@@ -1,6 +1,7 @@
 #ifndef BLOCK
 #define BLOCK
 #include <SFML/Graphics.hpp>
+#include<iostream>
 
 
 class Block
