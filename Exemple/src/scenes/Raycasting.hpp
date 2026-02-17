@@ -2,6 +2,7 @@
 #define RAYCASTING
 #include "Scene.hpp"
 #include "Button.hpp"
+#include "block.hpp"
 
 class Raycasting : public Scene
 {
@@ -11,6 +12,10 @@ class Raycasting : public Scene
         bool wantToChange;
 
         Button menu_button;
+
+        std::vector<Block> map;
+        sf::Vector2f coo;
+        float angle;
 
     public:
         Raycasting();
