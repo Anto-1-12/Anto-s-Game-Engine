@@ -11,7 +11,7 @@ D3::D3():
     vitesse(60)
     //test
 {
-    map_obj.push_back(Model3D(sf::Vector3f(100,60,60),"assets/models/test.obj",100));
+    //map_obj.push_back(Model3D(sf::Vector3f(100,60,60),"assets/models/model2.obj",0.5));
     map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/tourEiffel.obj",100));
     map_obj.push_back(Model3D(sf::Vector3f(60,0,0),"assets/models/block.obj",10));
 }
