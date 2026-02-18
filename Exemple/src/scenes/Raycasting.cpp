@@ -7,7 +7,7 @@ Raycasting::Raycasting():
     wantToChange(false),
     coo(30,30),
     angle(2.05),
-    vitesse(1)
+    vitesse(60)
     //test
 {
     map.push_back(Block(sf::Vector2f(0,0),20));
@@ -106,31 +106,31 @@ void Raycasting::update(float dt)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
     {
-        coo.x += std::cos(angle) * vitesse;
-        coo.y += std::sin(angle) * vitesse;
+        coo.x += std::cos(angle) * vitesse * dt;
+        coo.y += std::sin(angle) * vitesse * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
     {
-        coo.x -= std::cos(angle) * vitesse;
-        coo.y -= std::sin(angle) * vitesse;
+        coo.x -= std::cos(angle) * vitesse * dt;
+        coo.y -= std::sin(angle) * vitesse * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
     {
-        coo.x -= std::cos(angle + M_PI/2) * vitesse;
-        coo.y -= std::sin(angle + M_PI/2) * vitesse;
+        coo.x -= std::cos(angle + M_PI/2) * vitesse * dt;
+        coo.y -= std::sin(angle + M_PI/2) * vitesse * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
     {
-        coo.x += std::cos(angle + M_PI/2) * vitesse;
-        coo.y += std::sin(angle + M_PI/2) * vitesse;
+        coo.x += std::cos(angle + M_PI/2) * vitesse * dt;
+        coo.y += std::sin(angle + M_PI/2) * vitesse * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
     {
-        angle -= (vitesse*2)/30;
+        angle -= (vitesse*2)/30 * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
     {
-        angle += (vitesse*2)/30;
+        angle += (vitesse*2)/30 * dt;
         
     }
     
