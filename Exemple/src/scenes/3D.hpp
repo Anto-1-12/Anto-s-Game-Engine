@@ -3,7 +3,7 @@
 #include <cmath>
 #include "Scene.hpp"
 #include "Button.hpp"
-#include "block3D.hpp"
+#include "model3D.hpp"
 
 class D3 : public Scene
 {
@@ -14,7 +14,7 @@ class D3 : public Scene
 
         Button menu_button;
 
-        std::vector<Block3D> map;
+        std::vector<Model3D> map_obj;
         sf::Vector3f coo;
         float yawn;
         float pitch;
