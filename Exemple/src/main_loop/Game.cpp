@@ -93,14 +93,14 @@ void Game::run()
                     if (isFullScreen)
                     {
                         //remplace la fenetre par un full screen
-                        window.create(sf::VideoMode::getDesktopMode(), "KDW", sf::State::Fullscreen);
+                        window.create(sf::VideoMode::getDesktopMode(), "Exemple", sf::State::Fullscreen);
                         letterboxing(sf::Vector2f(window.getSize().x,window.getSize().y));
                         window.setView(view);
                     }
                     else
                     {
                         //remplace la fenetre par un windowed
-                        window.create(sf::VideoMode({1280, 720}), "KDW", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
+                        window.create(sf::VideoMode({1280, 720}), "Exemple", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
                         letterboxing(sf::Vector2f(window.getSize().x,window.getSize().y));
                         window.setView(view);
                     }
