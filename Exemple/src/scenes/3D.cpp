@@ -6,14 +6,13 @@ D3::D3():
     scneneToChange("Menu"),
     wantToChange(false),
     coo(30,30,0),
-    angle(2.05),
+    yawn(2.05),
+    pitch(0),
     vitesse(1)
     //test
 {
-    map.push_back(Block3D(sf::Vector3f(0,0,0),20));
     map.push_back(Block3D(sf::Vector3f(0,60,0),20));
-    map.push_back(Block3D(sf::Vector3f(60,0,0),20));
-    map.push_back(Block3D(sf::Vector3f(60,60,0),20));
+
 }
 
 D3::~D3()
@@ -27,7 +26,7 @@ void D3::draw(sf::RenderWindow& window)
     {
         std::vector<sf::Vector3f> block = map[i].getCoo();
 
-        std::vector<std::vector<sf::Vector2f>> points;
+        std::vector<sf::Vector2f> points;
 
         for (int a = 0; a < block.size() ; a++)
         {
@@ -39,51 +38,37 @@ void D3::draw(sf::RenderWindow& window)
             float h = window.getView().getSize().y;
             //------------------------------------------ 
 
-            float dx = blockCoo.x - coo.x;
-            float dy = blockCoo.y - coo.y;
+            float distance_plan_cam = (w/2)/tan(M_PI/4);
 
-            float ray_size = sqrt(dx * dx + dy * dy);
+            float odx = blockCoo.x - coo.x;
+            float ody = blockCoo.y - coo.y;
+            float odz = blockCoo.z - coo.z;
 
-            float angle_ray = std::fmod(std::atan2(dy, dx), 2.0 * M_PI);
+            // ----- YAW -----
+            float dx1 = odx * std::cos(yawn) - ody * std::sin(yawn);
+            float dy1 = odx * std::sin(yawn) + ody * std::cos(yawn);
+            float dz1 = odz;
+
+            // ----- PITCH -----
+            float dy2 = dy1 * std::cos(pitch) - dz1 * std::sin(pitch);
+            float dz2 = dy1 * std::sin(pitch) + dz1 * std::cos(pitch);
+            float dx2 = dx1;
+
+            float x = (dx2/dy2) * distance_plan_cam + w/2;
+            float y = (dz2/dy2) * distance_plan_cam + h/2;
+
+            points.push_back(sf::Vector2f(x, y));
+
+            sf::ConvexShape carre;
+            carre.setPointCount(4);
             
-            float reel_angle = angle_ray - angle;
-            float reel_ray_size = std::cos(reel_angle) * ray_size;
-            float height_wall = (h * 10)/(reel_ray_size + 0.0001);
+            carre.setPoint(0, sf::Vector2f(x,y));
+            carre.setPoint(1, sf::Vector2f(x+10,y));
+            carre.setPoint(3, sf::Vector2f(x,y+10));
+            carre.setPoint(2, sf::Vector2f(x+10,y+10));
+
+            window.draw(carre);
             
-            float distance_du_centre = (std::tan(reel_angle)/std::tan(M_PI/4))*(w/2)+w/2;
-
-            std::vector<sf::Vector2f> point;
-            
-            point.push_back(sf::Vector2f(distance_du_centre, h/2 + height_wall));
-            point.push_back(sf::Vector2f(distance_du_centre, h/2 - height_wall)); 
-
-            if (reel_angle > M_PI)  reel_angle -= 2*M_PI;
-            if (reel_angle < -M_PI) reel_angle += 2*M_PI;
-
-            if (std::abs(reel_angle) < M_PI/4)
-            {
-                points.push_back(point);
-            }
-        }
-
-        std::vector<sf::Vector2i> aretes = map[i].getAray();
-
-        for (int b = 0; b < aretes.size(); b++)
-        {
-            if (!points.empty()){
-                if (points.size() > aretes[b].x && points.size() > aretes[b].y)
-                {
-                    sf::ConvexShape carre;
-                    carre.setPointCount(4);
-            
-                    carre.setPoint(0, points[aretes[b].x][0]);
-                    carre.setPoint(1, points[aretes[b].x][1]);
-                    carre.setPoint(3, points[aretes[b].y][0]);
-                    carre.setPoint(2, points[aretes[b].y][1]);
-
-                    window.draw(carre);
-                }
-            }
         }
 
     }
@@ -98,49 +83,71 @@ void D3::event(const sf::Event& event)
 
 void D3::update(float dt)
 {
+    float forwardX = std::sin(yawn);
+    float forwardY = std::cos(yawn);
+
+    float rightX = std::cos(yawn);
+    float rightY = -std::sin(yawn);
+
     if(menu_button.buttonIsClicked())
     {
         scneneToChange = "Menu";
         wantToChange = true;
     }
 
+    // AVANCER
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
     {
-        coo.x += std::cos(angle) * vitesse;
-        coo.y += std::sin(angle) * vitesse;
+        coo.x -= forwardX * vitesse;
+        coo.y -= forwardY * vitesse;
     }
+
+    // RECULER
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
     {
-        coo.x -= std::cos(angle) * vitesse;
-        coo.y -= std::sin(angle) * vitesse;
+        coo.x += forwardX * vitesse;
+        coo.y += forwardY * vitesse;
     }
+
+    // GAUCHE (strafe)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
     {
-        coo.x -= std::cos(angle + M_PI/2) * vitesse;
-        coo.y -= std::sin(angle + M_PI/2) * vitesse;
+        coo.x += rightX * vitesse;
+        coo.y += rightY * vitesse;
     }
+
+    // DROITE (strafe)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
     {
-        coo.x += std::cos(angle + M_PI/2) * vitesse;
-        coo.y += std::sin(angle + M_PI/2) * vitesse;
+        coo.x -= rightX * vitesse;
+        coo.y -= rightY * vitesse;
     }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+    {
+        coo.z += vitesse;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+    {
+        coo.z -= vitesse;
+    }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
     {
-        angle -= (vitesse*2)/30;
+        yawn -= (vitesse*2)/30;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
     {
-        angle += (vitesse*2)/30;
-        
+        yawn += (vitesse*2)/30;
     }
-    
-    if (angle < 0)
-    {    
-        angle += M_PI * 2;
-    }
-    else if (angle > M_PI * 2)
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
     {
-        angle -= M_PI * 2;
+        pitch += (vitesse*2)/30;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+    {
+        pitch -= (vitesse*2)/30;
     }
 
 }

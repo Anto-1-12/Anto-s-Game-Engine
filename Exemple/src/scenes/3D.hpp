@@ -16,7 +16,8 @@ class D3 : public Scene
 
         std::vector<Block3D> map;
         sf::Vector3f coo;
-        float angle;
+        float yawn;
+        float pitch;
         float vitesse;
 
     public:
