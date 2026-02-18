@@ -24,14 +24,51 @@ std::vector<sf::Vector3f> Block3D::getCoo()
     return geo;
 }
 
-std::vector<sf::Vector2i> Block3D::getAray()
+std::vector<std::vector<int>> Block3D::getAray()
 {
-    std::vector<sf::Vector2i> geo;
+    std::vector<std::vector<int>> geo;
     
-    geo.push_back(sf::Vector2i(0,1));
-    geo.push_back(sf::Vector2i(2,0));
-    geo.push_back(sf::Vector2i(3,1));
-    geo.push_back(sf::Vector2i(2,3));
+    std::vector<int> face_1;
+    face_1.push_back(0);
+    face_1.push_back(1);
+    face_1.push_back(5);
+    face_1.push_back(4);
+    geo.push_back(face_1);
+
+    std::vector<int> face_2;
+    face_2.push_back(4);
+    face_2.push_back(5);
+    face_2.push_back(7);
+    face_2.push_back(6);
+    geo.push_back(face_2);
+    
+    std::vector<int> face_3;
+    face_3.push_back(6);
+    face_3.push_back(2);
+    face_3.push_back(3);
+    face_3.push_back(7);
+    geo.push_back(face_3);
+
+    std::vector<int> face_4;
+    face_4.push_back(3);
+    face_4.push_back(2);
+    face_4.push_back(0);
+    face_4.push_back(1);
+    geo.push_back(face_4);
+
+    std::vector<int> face_5;
+    face_5.push_back(6);
+    face_5.push_back(4);
+    face_5.push_back(0);
+    face_5.push_back(2);
+    geo.push_back(face_5);
+
+    std::vector<int> face_6;
+    face_6.push_back(1);
+    face_6.push_back(3);
+    face_6.push_back(7);
+    face_6.push_back(5);
+    geo.push_back(face_6);
 
     return geo;
 }

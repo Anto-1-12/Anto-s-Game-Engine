@@ -14,7 +14,7 @@ class Block3D
         Block3D(sf::Vector3f n_coo, float l);
 
         std::vector<sf::Vector3f> getCoo();
-        std::vector<sf::Vector2i> getAray();
+        std::vector<std::vector<int>> getAray();
 
 };
 
