@@ -95,8 +95,6 @@ void D3::draw(sf::RenderWindow& window)
     }
 
     menu_button.draw(window);
-
-    std::cout<<coo.z<<std::endl;
 }
 
 void D3::event(const sf::Event& event)
