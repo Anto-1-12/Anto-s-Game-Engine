@@ -11,9 +11,10 @@ D3::D3():
     vitesse(60)
     //test
 {
-    //map_obj.push_back(Model3D(sf::Vector3f(100,60,60),"assets/models/model2.obj",0.5));
-    map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/tourEiffel.obj",100));
-    map_obj.push_back(Model3D(sf::Vector3f(60,0,0),"assets/models/block.obj",10));
+    //map_obj.push_back(Model3D(sf::Vector3f(100,60,60),"assets/models/model2.obj",10));
+    //map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/tourEiffel.obj",100));
+    map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/E 45 Aircraft_obj.obj",100));
+    map_obj.push_back(Model3D(sf::Vector3f(200,0,0),"assets/models/tourEiffel.obj",100));
 }
 
 D3::~D3()
@@ -71,26 +72,39 @@ void D3::draw(sf::RenderWindow& window)
         }
 
         std::vector<std::vector<int>> faces = map_obj[i].getFaces();
+        std::vector<sf::Vector3f> vns = map_obj[i].getVectorNormal();
 
         for ( int b = 0; b < faces.size(); b++)
         {
-            sf::ConvexShape triangle;
-            triangle.setPointCount(faces[b].size());
+            sf::Vector3f vn = vns[b];
+            sf::Vector3f vd = sf::Vector3f(std::cos(pitch)*std::cos(yawn),std::sin(pitch),std::cos(pitch) * std::sin(yawn));
 
-            bool draw = true;
-
-            for ( int  p = 0; p < faces[b].size(); p++)
+            if(vn.x*vd.x + vn.y*vd.y + vn.z*vd.z <= 0)
             {
-                if (points[faces[b][p]] == sf::Vector2f(-10000, -10000))
+                sf::ConvexShape triangle;
+                triangle.setPointCount(faces[b].size());
+
+                sf::VertexArray lines(sf::PrimitiveType::LineStrip,faces[b].size());
+            
+
+                bool draw = true;
+
+                for ( int  p = 0; p < faces[b].size(); p++)
                 {
-                    draw = false;
+                    if (points[faces[b][p]] == sf::Vector2f(-10000, -10000))
+                    {
+                        draw = false;
+                    }
+                    lines[p].position = points[faces[b][p]];
+                    lines[p].color = sf::Color::Red;
+                    triangle.setPoint(p, points[faces[b][p]]);
                 }
-                triangle.setPoint(p, points[faces[b][p]]);
-            }
 
-            if(draw)
-            {
-                window.draw(triangle);
+                if(draw)
+                {
+                    window.draw(triangle);
+                    window.draw(lines);
+                }
             }
         }
     }

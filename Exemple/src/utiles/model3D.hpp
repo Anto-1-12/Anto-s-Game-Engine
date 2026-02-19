@@ -2,6 +2,7 @@
 #define MODEL3D
 #include <SFML/Graphics.hpp>
 #include<iostream>
+#include <cmath>
 
 #include <sstream>
 #include <fstream>
@@ -14,6 +15,8 @@ class Model3D
         std::string file;
         std::vector<sf::Vector3f> points;
         std::vector<std::vector<int>> faces;
+        std::vector<sf::Vector3f> vn;
+        std::vector<sf::Vector3f> vn_by_face;
 
         float size;
 
@@ -22,6 +25,7 @@ class Model3D
 
         std::vector<sf::Vector3f> getVertexs();
         std::vector<std::vector<int>> getFaces();
+        std::vector<sf::Vector3f> getVectorNormal();
 
 };
 
