@@ -4,6 +4,7 @@
 #include "Scene.hpp"
 #include "Button.hpp"
 #include "model3D.hpp"
+#include "Projection3D.hpp"
 
 class D3 : public Scene
 {

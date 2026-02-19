@@ -32,37 +32,12 @@ void D3::draw(sf::RenderWindow& window)
 
         for (int a = 0; a < vertexs.size() ; a++)
         {
-            //         valeur raw
-            //------------------------------------------ 
-            sf::Vector3f vertexCoo = vertexs[a];
-            
-            float w = window.getView().getSize().x;
-            float h = window.getView().getSize().y;
-            //------------------------------------------ 
-
-            float distance_plan_cam = (w/2)/tan(M_PI/4);
-
-            float odx = vertexCoo.x - coo.x;
-            float ody = vertexCoo.y - coo.y;
-            float odz = vertexCoo.z - coo.z;
-
-            // ----- YAW -----
-            float dx1 = odx * std::cos(yawn) - ody * std::sin(yawn);
-            float dy1 = odx * std::sin(yawn) + ody * std::cos(yawn);
-            float dz1 = odz;
-
-            // ----- PITCH -----
-            float dy2 = dy1 * std::cos(pitch) - dz1 * std::sin(pitch);
-            float dz2 = dy1 * std::sin(pitch) + dz1 * std::cos(pitch);
-            float dx2 = dx1;
+            sf::Vector3f xyz = turn_point(coo,vertexs[a],sf::Vector3f(yawn,pitch,0));
 
             //verifier si l'objet est devan ou deriere pour ne pas le projetter dans le cas contraire
-            if(dy2 > 0)
+            if(xyz.y > 0)
             {
-                float x = (dx2/dy2) * distance_plan_cam + w/2;
-                float y = (-dz2/dy2) * distance_plan_cam + h/2;
-            
-                points.push_back(sf::Vector2f(x, y));
+                points.push_back(projection(xyz,window.getView().getSize(),M_PI/2));
             }
             else
             {
@@ -77,12 +52,27 @@ void D3::draw(sf::RenderWindow& window)
         for ( int b = 0; b < faces.size(); b++)
         {
             sf::Vector3f vn = vns[b];
-            sf::Vector3f vd = sf::Vector3f(std::cos(pitch)*std::cos(yawn),std::sin(pitch),std::cos(pitch) * std::sin(yawn));
+            sf::Vector3f vd = vn - coo;
 
-            if(vn.x*vd.x + vn.y*vd.y + vn.z*vd.z <= 0)
+            float dot_prod = vn.x*vd.x + vn.y*vd.y + vn.z*vd.z;
+
+            if(dot_prod <= 0)
             {
                 sf::ConvexShape triangle;
                 triangle.setPointCount(faces[b].size());
+
+                if (dot_prod < -255*2)
+                {
+                    dot_prod = -255 * 2;
+                }
+                else if (dot_prod > 0)
+                {
+                    dot_prod = 0;
+                }
+
+                //std::cout<<dot_prod<<std::endl;
+
+                triangle.setFillColor(sf::Color(dot_prod * 0.5,dot_prod * 0.5,dot_prod * 0.5));
 
                 sf::VertexArray lines(sf::PrimitiveType::LineStrip,faces[b].size());
             
@@ -103,7 +93,7 @@ void D3::draw(sf::RenderWindow& window)
                 if(draw)
                 {
                     window.draw(triangle);
-                    window.draw(lines);
+                    //window.draw(lines);
                 }
             }
         }
