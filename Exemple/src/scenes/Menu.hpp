@@ -14,6 +14,7 @@ class Menu : public Scene
         Button option_button;
         Button raycasting_button;
         Button D3_button;
+        Button oiaio_cat_button;
 
         sf::Texture bg;
         sf::Sprite backGround;

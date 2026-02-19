@@ -1,5 +1,7 @@
 #ifndef MODEL3D
 #define MODEL3D
+#include "Projection3D.hpp"
+
 #include <SFML/Graphics.hpp>
 #include<iostream>
 #include <cmath>
@@ -15,8 +17,11 @@ class Model3D
         std::string file;
         std::vector<sf::Vector3f> points;
         std::vector<std::vector<int>> faces;
+        std::vector<sf::Vector3f> v;
         std::vector<sf::Vector3f> vn;
         std::vector<sf::Vector3f> vn_by_face;
+
+        bool is_show = true;
 
         float size;
 
@@ -26,6 +31,13 @@ class Model3D
         std::vector<sf::Vector3f> getVertexs();
         std::vector<std::vector<int>> getFaces();
         std::vector<sf::Vector3f> getVectorNormal();
+
+        sf::Vector3f getCoo();
+
+        void turn_model(sf::Vector3f rotation);
+
+        bool get_show() {return is_show;};
+        void set_show( bool is) {is_show = is;};
 
 };
 

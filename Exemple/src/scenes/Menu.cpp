@@ -6,6 +6,7 @@ Menu::Menu():
     option_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Option",sf::Color(255,255,255),sf::Color(200,200,200),800,350.f,70,2.0f),
     raycasting_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Raycasting",sf::Color(255,255,255),sf::Color(200,200,200),800,550.f,70,2.0f),
     D3_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","3D",sf::Color(255,255,255),sf::Color(200,200,200),800,750.f,70,2.0f),
+    oiaio_cat_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Oiaio Cat",sf::Color(255,255,255),sf::Color(200,200,200),300,70,70,2.0f),
     scneneToChange("Menu"),
     wantToChange(false),
     bg("assets/textures/bground.png"),
@@ -43,6 +44,7 @@ void Menu::draw(sf::RenderWindow& window)
     option_button.draw(window);
     raycasting_button.draw(window);
     D3_button.draw(window);
+    oiaio_cat_button.draw(window);
 }
 
 void Menu::event(const sf::Event& event)
@@ -51,6 +53,7 @@ void Menu::event(const sf::Event& event)
     option_button.event(event);
     raycasting_button.event(event);
     D3_button.event(event);
+    oiaio_cat_button.event(event);
 
     //gestion de la resize
     
@@ -91,6 +94,11 @@ void Menu::update(float dt)
     else if(D3_button.buttonIsClicked())
     {
         scneneToChange = "3D";
+        wantToChange = true;
+    }
+    else if(oiaio_cat_button.buttonIsClicked())
+    {
+        scneneToChange = "OIAIOCAT";
         wantToChange = true;
     }
 }

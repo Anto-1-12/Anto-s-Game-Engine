@@ -5,7 +5,7 @@ D3::D3():
     menu_button("assets/textures/Button.png","assets/textures/Button2.png","assets/fonts/Runtti-Regular.ttf","Menu",sf::Color(255,255,255),sf::Color(200,200,200),170,70,70,2.0f),
     scneneToChange("Menu"),
     wantToChange(false),
-    coo(0,-300,100),
+    coo(0,-100,20),
     yawn(0),
     pitch(0),
     vitesse(60)
@@ -13,8 +13,10 @@ D3::D3():
 {
     //map_obj.push_back(Model3D(sf::Vector3f(100,60,60),"assets/models/model2.obj",10));
     //map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/tourEiffel.obj",100));
-    map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/E 45 Aircraft_obj.obj",100));
-    map_obj.push_back(Model3D(sf::Vector3f(200,0,0),"assets/models/tourEiffel.obj",100));
+    //map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/E 45 Aircraft_obj.obj",100));
+    //map_obj.push_back(Model3D(sf::Vector3f(200,0,0),"assets/models/tourEiffel.obj",100));
+    map_obj.push_back(Model3D(sf::Vector3f(0,0,0),"assets/models/OiiaioooooiaiFin.obj",1));
+    map_obj.push_back(Model3D(sf::Vector3f(100,0,0),"assets/models/cat1.obj",100));
 }
 
 D3::~D3()

@@ -3,6 +3,7 @@
 #include "Option.hpp"
 #include "Raycasting.hpp"
 #include "3D.hpp"
+#include "OiaioCat.hpp"
 
 //constructeur
 SceneType::SceneType()
@@ -30,6 +31,9 @@ Scene* SceneType::getSceneFromType(std::string type)
     }
     else if (type == "3D"){
         return new D3();
+    }
+    else if (type == "OIAIOCAT"){
+        return new OiaioCat();
     }
 
     //n'est pas sensé arriver
