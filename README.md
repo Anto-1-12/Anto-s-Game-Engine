@@ -20,10 +20,8 @@ A lightweight 3D/2D game engine project written in C++, built on top of **SFML**
 
 ```
 Anto-s-Game-Engine/
-├── src/            # Source code
-├── include/        # Headers
-├── assets/         # Game assets (if any)
-├── build/          # Build output (ignored)
+├── Engine/         # Engine source code
+├── Exemple/        # Exemple use of this game engine
 └── ...
 ```
 
