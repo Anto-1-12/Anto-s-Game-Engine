@@ -82,12 +82,6 @@ This project is licensed under the MIT License.
 
 ---
 
-## Author
-
-* Anto
-
----
-
 ## Notes
 
 If you're checking this project for a school application (e.g. Parcoursup),
