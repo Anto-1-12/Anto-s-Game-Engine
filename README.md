@@ -1,12 +1,12 @@
-# 🎮 Anto's Game Engine
+# Anto's Game Engine
 
 A lightweight 3D/2D game engine project written in C++, built on top of **SFML**.
 
-> ⚠️ This project is a personal learning project and is still in development.
+> This project is a personal learning project and is still in development.
 
 ---
 
-## 🚀 Features
+## Features
 
 * Basic rendering system (via SFML)
 * Custom game loop
@@ -16,7 +16,7 @@ A lightweight 3D/2D game engine project written in C++, built on top of **SFML**
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 
 ```
 Anto-s-Game-Engine/
@@ -31,7 +31,7 @@ Anto-s-Game-Engine/
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -50,11 +50,11 @@ cmake ..
 cmake --build .
 ```
 
-> 💡 This project is primarily developed and tested using **MinGW** rather than MSVC.
+> This project is primarily developed and tested using **MinGW** rather than MSVC.
 
 ---
 
-## 🎯 Goals of the Project
+## Goals of the Project
 
 This engine is mainly built to:
 
@@ -64,31 +64,31 @@ This engine is mainly built to:
 
 ---
 
-## 📌 Current State
+## Current State
 
 The project is under active development. Features may be incomplete or unstable.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This is a personal project, but suggestions and feedback are welcome.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
 ---
 
-## 👤 Author
+## Author
 
 * Anto
 
 ---
 
-## ⭐ Notes
+## Notes
 
 If you're checking this project for a school application (e.g. Parcoursup),
 this repository demonstrates:
